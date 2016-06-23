@@ -3,16 +3,20 @@ package com.example.kenzo.colate;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TabHost;
 
 import java.util.ArrayList;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity  implements
+        SwipeRefreshLayout.OnRefreshListener{
     private final static String RSS_URL = "http://searchranking.yahoo.co.jp/rss/burst_ranking-rss.xml";
     private ArrayList<Item> mitems;
     private RssListAdapter mAdapter;
+    private SwipeRefreshLayout mRefreshlayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +25,18 @@ public class MainActivity extends ListActivity {
         mitems = new ArrayList<Item>();
         mAdapter = new RssListAdapter(this,mitems);
 
+        createSwipeRefreshlayout();
+
         RssPaeserTask task = new RssPaeserTask(this,mAdapter);
         task.execute(RSS_URL);
         initTabs();
+    }
+
+    private void createSwipeRefreshlayout() {
+        mRefreshlayout = (SwipeRefreshLayout)findViewById(R.id.swipelayout);
+        mRefreshlayout.setColorSchemeColors(R.color.red,R.color.blue,R.color.green,R.color.yellow);
+        mRefreshlayout.setOnRefreshListener(this);
+
     }
 
     protected void initTabs(){
@@ -63,5 +76,15 @@ public class MainActivity extends ListActivity {
         intent.putExtra("detail",item.getDescription().toString());
         intent.putExtra("url",item.getUrl().toString());
         startActivity(intent);
+    }
+
+    @Override
+    public void onRefresh() {
+        mitems = new ArrayList();
+        mAdapter = new RssListAdapter(this, mitems);
+        // タスクはその都度生成する
+        RssPaeserTask task = new RssPaeserTask(this, mAdapter);
+        task.execute(RSS_URL);
+        mRefreshlayout.setRefreshing(false);
     }
 }
