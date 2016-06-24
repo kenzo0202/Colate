@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TabHost;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.firebase.client.Firebase;
+
 import java.util.ArrayList;
 
 public class MainActivity extends ListActivity  implements
@@ -21,6 +24,13 @@ public class MainActivity extends ListActivity  implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //firebaseの初期化
+        Firebase.setAndroidContext(this);
+        Firebase myFirebaseRef = new Firebase("https://colate-485e4.firebaseio.com/");
+        //データベースへの書き込み
+        myFirebaseRef.child("message").setValue("Do you have data? You'll love Firebase.");
+        //android-bootstrapの導入
+        TypefaceProvider.registerDefaultIconSets();
 
         mitems = new ArrayList<Item>();
         mAdapter = new RssListAdapter(this,mitems);

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "89377577067",
+    "firebase_url": "https://colate-485e4.firebaseio.com",
+    "project_id": "colate-485e4",
+    "storage_bucket": "colate-485e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89377577067:android:f5771bbbc68776b6",
+        "android_client_info": {
+          "package_name": "com.example.kenzo.colate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89377577067-gqp22s64r0g7p8g8ek6p8oaee2hh46u7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYs5jcywfq12yVrTpi7-kc9a-ORPajayw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
