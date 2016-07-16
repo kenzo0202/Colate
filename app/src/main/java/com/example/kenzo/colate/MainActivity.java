@@ -3,6 +3,7 @@ package com.example.kenzo.colate;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +12,19 @@ import android.widget.ListView;
 import android.widget.TabHost;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends ListActivity  implements
         SwipeRefreshLayout.OnRefreshListener{
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "SrHHJonYbB67yc6IbW13RDO8y";
+    private static final String TWITTER_SECRET = "ldeGIwT0bGEuTaCev7v9B7hmulERMfCK5Fk2zrWKrhkbuk2GMz";
+
     private final static String RSS_URL = "http://searchranking.yahoo.co.jp/rss/burst_ranking-rss.xml";
     private ArrayList<Item> mitems;
     private RssListAdapter mAdapter;
@@ -24,17 +33,28 @@ public class MainActivity extends ListActivity  implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_main);
         inputData();
-
-
-//        //firebaseの初期化
-//        Firebase.setAndroidContext(this);
-//        Firebase myFirebaseRef = new Firebase("https://colate-485e4.firebaseio.com/");
-//        //データベースへの書き込み
-//        myFirebaseRef.child("message").setValue("Do you have data? You'll love Firebase.");
-
-
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+//                //カメラ機能
+//                //パス取得→画像名設定→カメラ起動
+//                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+//                String filename = "test.jpg";
+//                File capturedFile = new File(path, filename);
+//                Uri uri = Uri.fromFile(capturedFile);
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//                //戻ってきたときに、onActivityResultへ飛ばせる
+//                startActivityForResult(intent, 1);
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         //android-bootstrapの導入
         TypefaceProvider.registerDefaultIconSets();
 
