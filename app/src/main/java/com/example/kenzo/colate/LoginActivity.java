@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
 
-        List<String> permissionNeeds = Arrays.asList("public_profile");
+        List<String> permissionNeeds = Arrays.asList("public_profile","email");
         loginButton.setReadPermissions(permissionNeeds);
 
 
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
                 Bundle parameters = new Bundle();
                 //fieldsに欲しい情報を追加する
-                parameters.putString("fields","id,name,gender");
+                parameters.putString("fields","id,name,gender,email");
                 graphrequest.setParameters(parameters);
                 graphrequest.executeAsync();
             }
@@ -223,6 +223,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 Log.d("param",object.getString("id"));
+                Log.d("param",String.valueOf(object));
                 params.put("sns_user_id",object.getString("id"));
                 params.put("name",object.getString("name"));
             } catch (JSONException e) {
