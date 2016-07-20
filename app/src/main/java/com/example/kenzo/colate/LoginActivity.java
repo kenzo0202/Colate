@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -58,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProfileTracker profileTracker;
     private RequestQueue mQueue;
     private TwitterLoginButton twiiterloginButton;
+    private Button RegisterButton;
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "SrHHJonYbB67yc6IbW13RDO8y";
@@ -66,10 +69,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         //Twitterログイン
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
+        setContentView(R.layout.activity_login);
+
 
         twiiterloginButton = (TwitterLoginButton)findViewById(R.id.twitter_login_button);
         twiiterloginButton.setCallback(new Callback<TwitterSession>() {
@@ -156,6 +160,16 @@ public class LoginActivity extends AppCompatActivity {
         };
         // If the access token is available already assign it.
         accessToken = AccessToken.getCurrentAccessToken();
+
+        RegisterButton = (Button)findViewById(R.id.button3);
+        RegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     /**
@@ -220,12 +234,9 @@ public class LoginActivity extends AppCompatActivity {
         protected Map<String,String> getParams(){
             Map<String,String> params = new HashMap<String,String>();
 
-
             try {
-                Log.d("param",object.getString("id"));
-                Log.d("param",String.valueOf(object));
-                params.put("sns_user_id",object.getString("id"));
                 params.put("name",object.getString("name"));
+                params.put("email",object.getString("email"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

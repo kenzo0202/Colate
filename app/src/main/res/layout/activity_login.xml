@@ -6,26 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kenzo.colate.LoginActivity"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
-        android:layout_width="217dp"
-        android:layout_height="40dp"
+        android:layout_width="256dp"
+        android:layout_height="28dp"
         android:layout_gravity="center_horizontal"
-        tools:layout_editor_absoluteY="38dp"
-        android:padding="20dp"
+        style="@style/FacebookLoginButton"
+        tools:layout_editor_absoluteY="121dp"
         app:layout_constraintLeft_toLeftOf="@+id/activity_login"
-        app:layout_constraintRight_toRightOf="@+id/activity_login"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintRight_toRightOf="@+id/activity_login" />
     <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:id="@+id/twitter_login_button"
         android:layout_width="217dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:layout_constraintLeft_toLeftOf="@+id/login_button"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_login"
         app:layout_constraintTop_toBottomOf="@+id/login_button"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="32dp"
+        app:layout_constraintRight_toRightOf="@+id/activity_login" />
+
+    <Button
+        android:text="新規登録"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/twitter_login_button"
+        android:layout_marginTop="40dp"
+        app:layout_constraintRight_toRightOf="@+id/twitter_login_button" />
 
 
 </android.support.constraint.ConstraintLayout>
