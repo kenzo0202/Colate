@@ -16,8 +16,7 @@
         android:layout_margin="10dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/icon_image"
-        android:src="@drawable/kenzo"/>
+        android:id="@+id/icon_image"/>
 
 
 
